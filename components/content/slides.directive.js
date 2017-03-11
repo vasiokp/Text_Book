@@ -27,19 +27,18 @@
 		function request(url) {
 				return $http.get(url, null)
 						.then(function (result) {
-							success(result);
+							return result.data;
 						}, function (error) {
 							console.log(error.status)
 						});
 			 }
 		function saveAlbumsListURl(result) {
-			//console.log(result);
 			$rootScope.AlbumsListURl = result.data.collections['album-list'].href;
 			apiService.get($rootScope.AlbumsListURl, null, saveAlbumsDescription, failure);
 		}
 
 		function saveAlbumsDescription(result) {
-			//console.log(result.data);
+			var a = {};
 			for (var i = 0; i < result.data.entries.length; i++) {
 				var albumInfo = {
 					Title: result.data.entries[i].title + result.data.entries[i].summary,
@@ -49,8 +48,15 @@
 				}
 				$rootScope.Topics[i] = albumInfo;
 				$scope.currentIndex = angular.copy(i);
-				$scope.albumId=angular.copy(albumInfo.AlbumId);
-				apiService.get($rootScope.Topics[i].Link, null, saveSlide, failure);
+				$scope.albumId = angular.copy(albumInfo.AlbumId);
+				console.log('before reqyest', i)
+				request(result.data.entries[i].links.photos).then(function (result) {
+					console.log('in reqyest',i)	
+					//a.push(result);
+				});
+				console.log('after reqyest', i)
+				//console.log(a);
+				//apiService.get($rootScope.Topics[i].Link, null, saveSlide, failure);
 			}
 		}
 		$scope.slides = [];
