@@ -16,12 +16,12 @@
 
 	function slidesCtrl($scope, $rootScope, $timeout, apiService) {
 		$rootScope.topics = [];
-		$rootScope.countTopics = 3; 
-			apiService.get('https://api-fotki.yandex.ru/api/users/textbook.book/', null, succes, failure);
-			apiService.get('https://fotki.yandex.ru/users/textbook-book/album/536798/', null, succes, failure);
+		$rootScope.countTopics = 3;
+		var config = { Host: 'https://api-fotki.yandex.ru' };
+		apiService.get('https://api-fotki.yandex.ru/api/users/textbook-book/', null, succes, failure);
+		apiService.get('https://api-fotki.yandex.ru/api/users/textbook-book/album/536798/', null, succes, failure);
 		function succes(result) {
 			console.log('succes');
-
 			console.log(result);
 		}
 		function failure(result) {
