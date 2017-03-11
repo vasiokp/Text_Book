@@ -1,0 +1,5 @@
+﻿<div>
+<span class="title-nav">Теми:</span>
+	<div ng-repeat="topic in topics">
+		<span class="topic-elemen" ng-class="{'topic-element-hover' : currentTopic == $index}" ng-click="selectTopic($index)">{{topic.Name}}</span>
+	</div></div>
