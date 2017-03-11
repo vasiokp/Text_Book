@@ -5,7 +5,7 @@
 	'use strict';
 
 	angular.module('TextBookApp', [])
-	.run(['$timeout', run]);
+	.run(['$timeout', run])
 
 	function run($timeout) {
 		$timeout(function () {

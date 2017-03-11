@@ -14,46 +14,67 @@
 		}
 	}
 
-	function slidesCtrl($scope, $rootScope, $timeout, apiService) {
+	function slidesCtrl($scope, $rootScope, $timeout, apiService,$http) {
 		$rootScope.topics = [];
+		$rootScope.Topics = {};
+		$scope.albumInfo = {}
 		$rootScope.countTopics = 3;
-		var config = { Host: 'https://api-fotki.yandex.ru' };
-		apiService.get('https://api-fotki.yandex.ru/api/users/textbook-book/', null, succes, failure);
-		apiService.get('https://api-fotki.yandex.ru/api/users/textbook-book/album/536798/', null, succes, failure);
+		apiService.get('https://api-fotki.yandex.ru/api/users/textbook.book/', null, saveAlbumsListURl, failure);
 		function succes(result) {
-			console.log('succes');
-			console.log(result);
+			console.log(result.data)
 		}
+	//	apiService.get('https://api-fotki.yandex.ru/api/users/textbook-book/album/536798/', null, succes, failure);
+		function request(url) {
+				return $http.get(url, null)
+						.then(function (result) {
+							success(result);
+						}, function (error) {
+							console.log(error.status)
+						});
+			 }
+		function saveAlbumsListURl(result) {
+			//console.log(result);
+			$rootScope.AlbumsListURl = result.data.collections['album-list'].href;
+			apiService.get($rootScope.AlbumsListURl, null, saveAlbumsDescription, failure);
+		}
+
+		function saveAlbumsDescription(result) {
+			//console.log(result.data);
+			for (var i = 0; i < result.data.entries.length; i++) {
+				var albumInfo = {
+					Title: result.data.entries[i].title + result.data.entries[i].summary,
+					Count: result.data.entries[i].imageCount,
+					Link: result.data.entries[i].links.photos,
+					AlbumId: result.data.entries[i].id.split(':').pop(),
+				}
+				$rootScope.Topics[i] = albumInfo;
+				$scope.currentIndex = angular.copy(i);
+				$scope.albumId=angular.copy(albumInfo.AlbumId);
+				apiService.get($rootScope.Topics[i].Link, null, saveSlide, failure);
+			}
+		}
+		$scope.slides = [];
+		function saveSlide(result, opt) {
+			var obj = {
+				Slides: [],
+				IdAlb: $scope.albumId
+			}
+			var slides = [];
+			var myI = angular.copy($scope.currentIndex);
+			for (var i = 0; i < result.data.entries.length; i++) 
+				slides.push(result.data.entries[i].img.orig.href)
+			
+			obj.Slides=slides;
+			$scope.slides.push(obj);
+			$rootScope.Topics[myI].Slides = slides;
+			console.log($rootScope.Topics);
+			console.log($scope.slides);
+		}
+
 		function failure(result) {
 			console.log('failure');
 			console.log(result);
 		}
-
-		var topicsName = [];
-		topicsName[0] = 'Розробка мовних процесорів мов програмування';
-		topicsName[1] = 'Елементи теорії формальних мов';
-		topicsName[2] = 'Регулярні множини';
-
-
-		$rootScope.slides = [];
-
-		function initSlides(count, topicNum) {
-				var slides =[];
-				for (var i = 0; i < count; i++) {
-					slides[i] = 'img/sistemne-prog/tema' + topicNum + '/Слайд' + (i + 1) + '.PNG';
-				}
-				var topic = {
-					Name: 'Тема ' + topicNum + '. ' + topicsName[topicNum-1],
-					Slides: slides
-				}
-				$rootScope.topics.push(topic);
-		}
-
-		initSlides(24, 1);
-		//initSlides(28, 2);
-		//initSlides(14, 3);
-
-		//console.log($rootScope.topics);
 
 	}
 
