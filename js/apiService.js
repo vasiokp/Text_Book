@@ -15,7 +15,6 @@
             return $http.get(url, config)
                     .then(function (result) {
                     	success(result);
-
                     }, function (error) {
                     	console.log(error.status)
                         if (error.status == '401') {

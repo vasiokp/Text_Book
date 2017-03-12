@@ -15,7 +15,9 @@
 
 	function leftMenuCtrl($scope, $rootScope, $timeout) {
 		$rootScope.currentTopic = 0;
-		$rootScope.lastSlide = 24 //$rootScope.topics[0].Slides.length;
+		$timeout(function () {
+			$rootScope.lastSlide = $rootScope.Topics[0].Slides.length;
+		}, 1000);
 
 
 		$scope.selectTopic = function (i) {

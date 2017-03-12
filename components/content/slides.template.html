@@ -3,7 +3,7 @@
 	<div class="slides">
 		<section ng-repeat="i in getNumber(countTopics) track by $index">
 			{{column=$index}}
-			<section id="{{$index}}" ng-repeat="slide in topics[column].Slides">
+			<section id="{{$index}}" ng-repeat="slide in Topics[column].Slides">
 				<img src="{{slide}}" />
 			</section>
 		</section>

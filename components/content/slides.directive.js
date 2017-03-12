@@ -16,7 +16,7 @@
 
 	function slidesCtrl($scope, $rootScope, $timeout, apiService,$http) {
 		$rootScope.topics = [];
-		$rootScope.Topics = {};
+		$rootScope.Topics = [];
 		$scope.albumInfo = {}
 		$rootScope.countTopics = 3;
 		apiService.get('https://api-fotki.yandex.ru/api/users/textbook.book/', null, saveAlbumsListURl, failure);
@@ -33,38 +33,31 @@
 						});
 			 }
 		function saveAlbumsListURl(result) {
-			$rootScope.AlbumsListURl = result.data.collections['album-list'].href;
-			apiService.get($rootScope.AlbumsListURl, null, saveAlbumsDescription, failure);
+			apiService.get(result.data.collections['album-list'].href, null, saveAlbumsDescription, failure);
 		}
-
 		function saveAlbumsDescription(result) {
-			var a = {};
-			for (var i = 0; i < result.data.entries.length; i++) {
-				var albumInfo = {
-					Title: result.data.entries[i].title + result.data.entries[i].summary,
-					Count: result.data.entries[i].imageCount,
-					Link: result.data.entries[i].links.photos,
-					AlbumId: result.data.entries[i].id.split(':').pop(),
-				}
-				$rootScope.Topics[i] = albumInfo;
-				$scope.currentIndex = angular.copy(i);
-				$scope.albumId = angular.copy(albumInfo.AlbumId);
-				console.log('before reqyest', i)
+			for (var i = 0; i < result.data.entries.length; i++) 
 				request(result.data.entries[i].links.photos).then(function (result) {
-					console.log('in reqyest',i)	
-					//a.push(result);
+					var slides = [];
+					console.log(result);
+					for (var i = result.entries.length-1; i >=0 ; i--) {
+						slides.push(result.entries[i].img.orig.href);
+					}
+					var topic = {
+						Slides: slides,
+						Title: result.title + result.summary,
+						Pos:parseInt(result.title.split(' ').pop().substring(0,1))
+					}
+					$rootScope.Topics.push(topic);
 				});
-				console.log('after reqyest', i)
-				//console.log(a);
-				//apiService.get($rootScope.Topics[i].Link, null, saveSlide, failure);
-			}
+			console.log($rootScope.Topics);
+
+			//$rootScope.Topics = $rootScope.Topics.sort(compare);
+			//$scope.Topics2 = $rootScope.Topics.sort(compare);
+			$scope.countTopics = result.data.entries.length;
+
 		}
-		$scope.slides = [];
 		function saveSlide(result, opt) {
-			var obj = {
-				Slides: [],
-				IdAlb: $scope.albumId
-			}
 			var slides = [];
 			var myI = angular.copy($scope.currentIndex);
 			for (var i = 0; i < result.data.entries.length; i++) 
