@@ -15,18 +15,19 @@
 
 	function leftMenuCtrl($scope, $rootScope, $timeout) {
 		$rootScope.currentTopic = 0;
-		$rootScope.lastSlide = 24 //$rootScope.topics[0].Slides.length;
+		$timeout(function () {
+			if ($rootScope.Topics[0])
+				$rootScope.lastSlide = $rootScope.Topics[0].Slides.length;
+			else
+				$rootScope.lastSlide = 24;
+		}, 1000);
 
 
 		$scope.selectTopic = function (i) {
-
 			$rootScope.currentTopic = i;
 			$rootScope.currentSlide = 1;
 			Reveal.slide($rootScope.currentTopic, 0);
-			$rootScope.lastSlide = $rootScope.topics[$rootScope.currentTopic].Slides.length;
-			console.log($rootScope.currentTopic);
-			console.log($rootScope.topics[$rootScope.currentTopic]);
-
+			$rootScope.lastSlide = $rootScope.Topics[$rootScope.currentTopic].Slides.length;
 		}
 
 			$scope.getNumber = function (num) {

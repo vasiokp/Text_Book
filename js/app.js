@@ -5,7 +5,7 @@
 	'use strict';
 
 	angular.module('TextBookApp', [])
-	.run(['$timeout', run]);
+	.run(['$timeout', run])
 
 	function run($timeout) {
 		$timeout(function () {
@@ -14,10 +14,12 @@
 					margin: 0,
 					minScale: 1,
 					maxScale: 1,
-					width: 1000,
-					height: 800,
-					controls: true,
+					width: 850,
+					height: 750,
+					center: false,
 					mouseWheel: false,
+					progress: false,
+					controls: false
 				}
 			);
 		}, 300);
