@@ -3,7 +3,6 @@
 	app.directive('slides', slides);
 	app.controller('slidesCtrl', slidesCtrl);
 
-
 	function slides() {
 		return {
 			bindToController: true,
@@ -14,11 +13,8 @@
 		}
 	}
 
-	function slidesCtrl($scope, $rootScope, $timeout, apiService,$http) {
-		$rootScope.topics = [];
+	function slidesCtrl($scope, $rootScope, apiService,$http) {
 		$rootScope.Topics = [];
-		$scope.albumInfo = {}
-		$rootScope.countTopics = 3;
 		apiService.get('https://api-fotki.yandex.ru/api/users/textbook.book/', null, saveAlbumsListURl, failure);
 		function succes(result) {
 			console.log(result.data)
@@ -39,7 +35,6 @@
 			for (var i = 0; i < result.data.entries.length; i++) 
 				request(result.data.entries[i].links.photos).then(function (result) {
 					var slides = [];
-					console.log(result);
 					for (var i = result.entries.length-1; i >=0 ; i--) {
 						slides.push(result.entries[i].img.orig.href);
 					}
@@ -48,33 +43,17 @@
 						Title: result.title + result.summary,
 						Pos:parseInt(result.title.split(' ').pop().substring(0,1))
 					}
-					$rootScope.Topics.push(topic);
+					$rootScope.Topics[topic.Pos-1]=topic;
 				});
 			console.log($rootScope.Topics);
-
-			//$rootScope.Topics = $rootScope.Topics.sort(compare);
-			//$scope.Topics2 = $rootScope.Topics.sort(compare);
 			$scope.countTopics = result.data.entries.length;
 
-		}
-		function saveSlide(result, opt) {
-			var slides = [];
-			var myI = angular.copy($scope.currentIndex);
-			for (var i = 0; i < result.data.entries.length; i++) 
-				slides.push(result.data.entries[i].img.orig.href)
-			
-			obj.Slides=slides;
-			$scope.slides.push(obj);
-			$rootScope.Topics[myI].Slides = slides;
-			console.log($rootScope.Topics);
-			console.log($scope.slides);
 		}
 
 		function failure(result) {
 			console.log('failure');
 			console.log(result);
 		}
-
 	}
 
 })(angular.module('TextBookApp'));
