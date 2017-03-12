@@ -2,7 +2,6 @@
 	height:100%;
 	background-color:#1aa3ff;
 	border-right:3px solid black;
-
 }
 
 .controll-section{
@@ -43,18 +42,16 @@ html{
 	top:40%;
 }
 
-
 .topic-element{
 	padding:7px;
 	font-weight:700;
 	margin: 5px;
 	display:block;
-
+	cursor:pointer
 }
 
 .topic-element:hover{
-	background-color:#f2f2f2;
-	cursor:pointer;
+	background-color:red;
 }
 
 .topic-element-hover{
