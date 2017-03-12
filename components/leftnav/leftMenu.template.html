@@ -1,5 +1,5 @@
 ﻿<div>
 <span class="title-nav">Теми:</span>
 	<div ng-repeat="topic in Topics">
-		<span class="topic-elemen" ng-class="{'topic-element-hover' : currentTopic == $index}" ng-click="selectTopic($index)">{{topic.Title}}</span>
+		<div class="topic-element" ng-class="{'topic-element-hover' : currentTopic == $index}" ng-click="selectTopic($index)">{{topic.Title}}</div>
 	</div></div>
