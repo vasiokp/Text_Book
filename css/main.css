@@ -6,6 +6,7 @@
 
 .controll-section{
 	height:100%;
+	min-width:130px;
 	background-color:#ff6a00;
 }
 

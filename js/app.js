@@ -14,7 +14,7 @@
 					margin: 0,
 					minScale: 1,
 					maxScale: 1,
-					width: 850,
+					width: 750,
 					height: 750,
 					center: false,
 					mouseWheel: false,
