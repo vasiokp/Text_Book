@@ -12,9 +12,9 @@
 			Reveal.initialize(
 				{
 
-					margin: 0,
-					minScale: 1,
-					maxScale: 1,
+					margin: 0.1,
+					minScale: 0.1,
+					maxScale: 2,
 					center: false,
 					mouseWheel: false,
 					progress: false,

@@ -1,8 +1,7 @@
 ﻿<div>
-
-	<div style="position:absolute;z-index:50" class="left-nav">
-		<div class="col-sm-12 title-top">
-			<select style="background-color:crimson;" ng-options="c.id as c.title for c in Subjects" ng-model="parrentId"></select>
+	<div class="left-nav">
+		<div class="col-sm- title-top">
+			<select class="form-control" ng-options="c.id as c.title for c in Subjects" ng-model="parrentId"></select>
 		</div>
 		<span class="title-nav">Теми:</span>
 		<div ng-repeat="topic in Topics">

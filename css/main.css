@@ -1,6 +1,8 @@
 ﻿.left-nav{
 	background-color:#1aa3ff;
 	border:3px solid black;
+	width:200px;
+	z-index:25;
 }
 
 .controll-section{
@@ -57,5 +59,4 @@ html{
 .topic-element-hover{
 	display:block;
 	background-color:#f2f2f2;
-
 }
