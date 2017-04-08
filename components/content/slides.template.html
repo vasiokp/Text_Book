@@ -1,8 +1,8 @@
 ﻿<div>
-	<div class="reveal">
+	<div class="reveal" style="width:1280px;">
 	<div class="slides">
 		<section ng-repeat="i in getNumber(countTopics) track by $index" ng-init="column = $index">
-			<section id="{{$index}}" ng-repeat="slide in Topics[column].Slides">
+			<section id="{{$index}}" ng-repeat="slide in Topics[column].Slides" >
 				<img src="{{slide}}" />
 			</section>
 		</section>
