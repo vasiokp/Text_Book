@@ -1,5 +1,9 @@
 ﻿<div>
-<span class="title-nav">Теми:</span>
+	<div class="col-sm-12 title-top">
+		<select style="background-color:crimson;" ng-options="c.id as c.title for c in Subjects" ng-model="parrentId"></select>
+	</div>
+	<span class="title-nav">Теми:</span>
 	<div ng-repeat="topic in Topics">
-		<div class="topic-element" ng-class="{'topic-element-hover' : currentTopic == $index}" ng-click="selectTopic($index)">{{topic.Title}}</div>
-	</div></div>
+		<div ng-show="topic.ParrentId == parrentId" class="topic-element" ng-class="{'topic-element-hover' : currentTopic == $index}" ng-click="selectTopic($index)">{{topic.Title}}</div>
+	</div>
+</div>

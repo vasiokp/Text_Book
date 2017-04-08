@@ -26,11 +26,11 @@
 		$scope.selectTopic = function (i) {
 			$rootScope.currentTopic = i;
 			$rootScope.currentSlide = 1;
-			Reveal.slide($rootScope.currentTopic, 0);
-			$rootScope.lastSlide = $rootScope.Topics[$rootScope.currentTopic].Slides.length;
+			Reveal.slide(i, 0);
+			$rootScope.lastSlide = $rootScope.Topics[i].Slides.length;
 		}
 
-			$scope.getNumber = function (num) {
+		$scope.getNumber = function (num) {
 				return new Array(num);
 			}
 

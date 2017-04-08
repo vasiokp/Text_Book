@@ -11,11 +11,10 @@
 		$timeout(function () {
 			Reveal.initialize(
 				{
+					width: 500,
+					height: 500,
 					margin: 0,
-					minScale: 1,
-					maxScale: 1,
-					width: 750,
-					height: 750,
+					viewDistance: 1,
 					center: false,
 					mouseWheel: false,
 					progress: false,
