@@ -1,11 +1,12 @@
 ﻿<div>
 	<div class="left-nav">
-		<div class="col-sm- title-top">
-			<select class="form-control" ng-options="c.id as c.title for c in Subjects" ng-model="parrentId"></select>
+		<div class="title-top">
+			<select class="select-subj" ng-options="c.id as c.title for c in Subjects" ng-model="parrentId"></select>
 		</div>
 		<span class="title-nav">Теми:</span>
 		<div ng-repeat="topic in Topics">
 			<div ng-show="topic.ParrentId == parrentId" class="topic-element" ng-class="{'topic-element-hover' : currentTopic == $index}" ng-click="selectTopic($index)">{{topic.Title}}</div>
 		</div>
 	</div>
+
 </div>
