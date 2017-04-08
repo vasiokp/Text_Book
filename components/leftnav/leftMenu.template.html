@@ -1,10 +1,10 @@
 ﻿<div>
 	<div class="left-nav">
 		<div class="title-top">
-			<select class="select-subj" ng-options="c.id as c.title for c in Subjects" ng-model="parrentId"></select>
+			<select class="select-subj" ng-options="c.id as c.title for c in Subjects" ng-model="parrentId" ng-init="parrentId = Subjects[0].id" ></select>
 		</div>
 		<span class="title-nav">Теми:</span>
-		<div ng-repeat="topic in Topics">
+		<div ng-repeat="topic in Topics | orderBy : 'Title'">
 			<div ng-show="topic.ParrentId == parrentId" class="topic-element" ng-class="{'topic-element-hover' : currentTopic == $index}" ng-click="selectTopic($index)">{{topic.Title}}</div>
 		</div>
 	</div>
