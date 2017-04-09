@@ -63,13 +63,15 @@
 						Slides: slides,
 						Title: result.title + result.summary,
 						Pos: parseInt(result.title.split(' ').pop().substring(0, 1)),
-						ParrentId: result.parrentId
+						ParrentId: result.parrentId,
+						Id:result.id.split(':')[5]
 					}
 					$rootScope.Topics.push(topic);
 					$rootScope.countTopics = $rootScope.Topics.length;
 
 				});
 			}
+			console.log($rootScope.Topics)
 			}
 
 
