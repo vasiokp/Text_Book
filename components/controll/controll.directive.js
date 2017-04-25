@@ -15,7 +15,7 @@
 
 	function controllCtrl($scope, $rootScope) {
 		$rootScope.currentSlide = 1;
-
+		$rootScope.selectedTopic = false;
 		$scope.goToSlide = function (slide) {
 			Reveal.slide($rootScope.currentTopic-1, slide - 1);
 		}

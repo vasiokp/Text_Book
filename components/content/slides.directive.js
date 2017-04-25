@@ -71,7 +71,6 @@
 
 				});
 			}
-			console.log($rootScope.Topics)
 			}
 
 

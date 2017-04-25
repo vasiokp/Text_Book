@@ -25,6 +25,10 @@
 
 		$scope.selectTopic = function (i) {
 			$rootScope.currentTopic = i;
+			console.log(i);
+			if (i >= 0) {
+				$rootScope.selectedTopic = true;
+			}
 			$rootScope.currentSlide = 1;
 			Reveal.slide(i, 0);
 			$rootScope.lastSlide = $rootScope.Topics[i].Slides.length;
