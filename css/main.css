@@ -73,3 +73,10 @@ html{
     font-size: medium;
     font-weight: 700;
 }
+
+.btn-help{
+	position: absolute;
+    z-index: 20;
+	top:5px;
+    right: 50px;
+}
